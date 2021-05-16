@@ -9,7 +9,8 @@ call vundle#begin()
 "
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
+Plugin 'ycm-core/YouCompleteMe'
+"Plugin 'neoclide/coc.nvim'
 Plugin 'chriskempson/base16-vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'junegunn/goyo.vim'
@@ -32,6 +33,7 @@ Plugin 'othree/xml.vim'
 Plugin 'ervandew/supertab'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'preservim/nerdtree'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 call glaive#Install()
@@ -106,6 +108,21 @@ set shiftwidth=2
 set softtabstop=2
 set expandtab
 
+"let g:python_recommended_style = 0
+"filetype plugin indent on
+"syntax on
+
 set hlsearch
 
 let g:indent_guides_enable_on_vim_startup = 1
+
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_autoclose_preview_window_after_completion = 1
+
+autocmd vimenter * NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd VimEnter * NERDTree | wincmd p
+
+
